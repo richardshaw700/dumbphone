@@ -231,7 +231,7 @@ fi
 
 # Open F-Droid first to let it initialize and update repos
 echo -e "${CYAN}Opening F-Droid to initialize...${NC}"
-adb shell am start -n org.fdroid.fdroid/.FDroid > /dev/null 2>&1
+adb shell monkey -p org.fdroid.fdroid -c android.intent.category.LAUNCHER 1 > /dev/null 2>&1
 sleep 3
 
 echo -e "${CYAN}Please wait for F-Droid to update its repository list (first time may take a minute)${NC}"
@@ -241,7 +241,7 @@ while true; do
     read -r FDROID_INPUT
     if [ "$FDROID_INPUT" = "r" ] || [ "$FDROID_INPUT" = "R" ]; then
         echo -e "${CYAN}Re-opening F-Droid...${NC}"
-        adb shell am start -n org.fdroid.fdroid/.FDroid > /dev/null 2>&1
+        adb shell monkey -p org.fdroid.fdroid -c android.intent.category.LAUNCHER 1 > /dev/null 2>&1
     else
         break
     fi
