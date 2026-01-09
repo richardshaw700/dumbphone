@@ -34,6 +34,11 @@
             android:launchMode="singleInstance"
             android:theme="@style/Theme.LockScreen" />
 
+        <activity
+            android:name=".SecurityActivity"
+            android:exported="false"
+            android:theme="@style/Theme.BigmeLauncher" />
+
         <receiver
             android:name=".BootReceiver"
             android:enabled="true"

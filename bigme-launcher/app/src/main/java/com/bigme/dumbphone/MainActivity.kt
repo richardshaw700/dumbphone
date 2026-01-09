@@ -58,7 +58,8 @@ class MainActivity : AppCompatActivity() {
         AppItem("Smart Devices", listOf("com.tplink.kasa_android")),
         AppItem("Contacts", listOf("org.fossify.contacts")),
         AppItem("Thermostat", listOf("com.ecobee.athenamobile")),
-        AppItem("Quo", listOf("com.openphone"))
+        AppItem("Quo", listOf("com.openphone")),
+        SecurityItem
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,7 +72,8 @@ class MainActivity : AppCompatActivity() {
         adapter = AppAdapter(
             buildDisplayList(),
             onItemClick = { item -> launchApp(item) },
-            onGroupClick = { group -> toggleGroup(group) }
+            onGroupClick = { group -> toggleGroup(group) },
+            onSecurityClick = { openSecurityPage() }
         )
         recyclerView.adapter = adapter
         
@@ -119,6 +121,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                 }
+                is SecurityItem -> list.add(DisplayItem.Security)
             }
         }
         return list
@@ -150,6 +153,11 @@ class MainActivity : AppCompatActivity() {
             Toast.LENGTH_SHORT
         ).show()
     }
+    
+    private fun openSecurityPage() {
+        val intent = Intent(this, SecurityActivity::class.java)
+        startActivity(intent)
+    }
 
     @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
@@ -161,22 +169,26 @@ class MainActivity : AppCompatActivity() {
 sealed class ListItem
 data class AppItem(val displayName: String, val packageIds: List<String>) : ListItem()
 data class AppGroup(val name: String, val children: List<AppItem>) : ListItem()
+object SecurityItem : ListItem()
 
 sealed class DisplayItem {
     data class App(val app: AppItem, val isChild: Boolean) : DisplayItem()
     data class Group(val group: AppGroup, val isExpanded: Boolean) : DisplayItem()
+    object Security : DisplayItem()
 }
 
 // Adapter
 class AppAdapter(
     private var items: List<DisplayItem>,
     private val onItemClick: (AppItem) -> Unit,
-    private val onGroupClick: (AppGroup) -> Unit
+    private val onGroupClick: (AppGroup) -> Unit,
+    private val onSecurityClick: () -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         const val TYPE_APP = 0
         const val TYPE_GROUP = 1
+        const val TYPE_SECURITY = 2
     }
 
     fun updateItems(newItems: List<DisplayItem>) {
@@ -188,6 +200,7 @@ class AppAdapter(
         return when (items[position]) {
             is DisplayItem.App -> TYPE_APP
             is DisplayItem.Group -> TYPE_GROUP
+            is DisplayItem.Security -> TYPE_SECURITY
         }
     }
 
@@ -208,6 +221,10 @@ class AppAdapter(
             is DisplayItem.Group -> {
                 viewHolder.textView.text = item.group.name
                 viewHolder.itemView.setOnClickListener { onGroupClick(item.group) }
+            }
+            is DisplayItem.Security -> {
+                viewHolder.textView.text = "Security"
+                viewHolder.itemView.setOnClickListener { onSecurityClick() }
             }
         }
     }
