@@ -1,0 +1,30 @@
+# Android build artifacts (keep launcher.apk for distribution)
+bigme-launcher/app/build/
+*.aab
+*.dex
+*.class
+bin/
+gen/
+out/
+
+# Gradle
+.gradle/
+build/
+*.iml
+
+# Local configuration
+local.properties
+
+# IDE
+.idea/
+*.iws
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Generated files
+installed-apps-*.txt
+all-installed-apps.txt
+screenshot.png
+
