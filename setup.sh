@@ -142,7 +142,7 @@ echo -e "${RED}   Select 'Don't back up' or disable backup!${NC}"
 echo ""
 echo -e "${YELLOW}   Why: Google Backup uploads your app data, Wi-Fi passwords,${NC}"
 echo -e "${YELLOW}   call history, device settings, and SMS to Google servers.${NC}"
-echo -e "${YELLOW}   This data can be accessed by Google and law enforcement.${NC}"
+echo -e "${YELLOW}   This data can be accessed by Google, governments, and data purchasers.${NC}"
 echo ""
 echo "Press Enter after signing in (with backup DISABLED)..."
 read -r
