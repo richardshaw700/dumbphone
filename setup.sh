@@ -264,12 +264,11 @@ for app in "${FDROID_APPS[@]}"; do
     if adb shell pm list packages | grep -q "^package:$PACKAGE$"; then
         echo -e "${GREEN}✓ $NAME already installed${NC}"
     else
-        echo -e "${YELLOW}→ Install: $NAME${NC}"
+        echo -e "${YELLOW}→ Opening F-Droid for: $NAME${NC}"
         
-        # Open F-Droid app
-        adb shell monkey -p org.fdroid.fdroid -c android.intent.category.LAUNCHER 1 > /dev/null 2>&1
+        # Open F-Droid directly to the app page (force F-Droid to handle with -p flag)
+        adb shell am start -a android.intent.action.VIEW -d "https://f-droid.org/packages/$PACKAGE" -p org.fdroid.fdroid > /dev/null 2>&1
         
-        echo -e "${CYAN}  In F-Droid, search for: $NAME${NC}"
         echo -e "${CYAN}  Press Enter after installing $NAME...${NC}"
         read -r
         
