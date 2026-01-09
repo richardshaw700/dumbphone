@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/securityRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    android:padding="32dp">
+    android:padding="32dp"
+    android:scrollbars="none"
+    android:clickable="true"
+    android:focusable="true">
     
     <LinearLayout
         android:layout_width="match_parent"
@@ -165,15 +169,108 @@
             android:textSize="22sp"
             android:textColor="@android:color/black"
             android:textStyle="bold"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginBottom="12dp" />
         
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="• Telemetry disabled\n• Advertising ID deleted\n• Google backup disabled\n• Play Services restricted\n• Tracker blocking via NextDNS\n• Bloatware removed"
-            android:textSize="16sp"
+            android:text="Telemetry Disabled"
+            android:textSize="17sp"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp" />
+        
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Usage statistics, crash reports, and diagnostic data collection are all turned off at the system level."
+            android:textSize="15sp"
             android:textColor="#444444"
-            android:lineSpacingExtra="4dp"
+            android:layout_marginBottom="16dp" />
+        
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Advertising ID Deleted"
+            android:textSize="17sp"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp" />
+        
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Your unique advertising identifier has been reset and personalized ads are disabled. Ad networks can't build a profile on you."
+            android:textSize="15sp"
+            android:textColor="#444444"
+            android:layout_marginBottom="16dp" />
+        
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Google Backup Disabled"
+            android:textSize="17sp"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp" />
+        
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Your app data, settings, and call history are not uploaded to Google's servers. This data stays on-device only."
+            android:textSize="15sp"
+            android:textColor="#444444"
+            android:layout_marginBottom="16dp" />
+        
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Play Services Restricted"
+            android:textSize="17sp"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp" />
+        
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Google Play Services has been denied access to your clipboard, contacts, calendar, call log, and SMS. It can only access what's essential."
+            android:textSize="15sp"
+            android:textColor="#444444"
+            android:layout_marginBottom="16dp" />
+        
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Network-Level Blocking"
+            android:textSize="17sp"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp" />
+        
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Private DNS via NextDNS blocks known trackers, analytics, and telemetry domains before they can even connect."
+            android:textSize="15sp"
+            android:textColor="#444444"
+            android:layout_marginBottom="16dp" />
+        
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bloatware Removed"
+            android:textSize="17sp"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp" />
+        
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pre-installed apps from Bigme and Google that weren't essential have been uninstalled—not just disabled. Fewer apps means fewer attack vectors."
+            android:textSize="15sp"
+            android:textColor="#444444"
             android:layout_marginBottom="24dp" />
         
         <!-- Minimal Attack Surface -->
@@ -189,7 +286,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Only essential apps. No browser. No social media. Fewer apps means fewer vulnerabilities."
+            android:text="Only essential apps. No browser. No social media. Fewer apps means fewer vulnerabilities and less distraction."
             android:textSize="16sp"
             android:textColor="#444444"
             android:layout_marginBottom="32dp" />
@@ -198,12 +295,12 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tap anywhere to go back"
-            android:textSize="14sp"
-            android:textColor="#999999"
+            android:text="← Tap anywhere to go back"
+            android:textSize="16sp"
+            android:textColor="#666666"
             android:gravity="center"
-            android:layout_marginTop="16dp" />
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="32dp" />
         
     </LinearLayout>
 </ScrollView>
-
