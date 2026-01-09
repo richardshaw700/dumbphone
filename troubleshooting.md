@@ -34,6 +34,7 @@ This should bring up the recovery menu. Skip to Step 4.
 ### Step 4: Recovery Menu Options
 
 You should see this menu:
+
 ```
 Reboot system now
 Reboot to bootloader
@@ -53,10 +54,12 @@ Power off
 ### Step 5: Try These in Order
 
 #### Option A: Simple Reboot (rarely works but try first)
+
 - Select "Reboot system now"
 - If it boot loops again, go back to recovery
 
 #### Option B: Wipe Data/Factory Reset ⚠️ ERASES ALL DATA (THIS WORKED ✅)
+
 - Select "Wipe data/factory reset"
 - Confirm YES when prompted
 - Wait for completion
@@ -73,16 +76,19 @@ If recovery doesn't work:
 
 1. In recovery, select "Enter fastboot"
 2. On your Mac, run:
+
 ```bash
 fastboot devices
 ```
 
 3. If device is locked (most are), you cannot erase partitions:
+
 ```bash
 fastboot erase cache  # Will fail if locked
 ```
 
 4. Return to recovery:
+
 ```bash
 fastboot reboot recovery
 ```
@@ -92,12 +98,15 @@ fastboot reboot recovery
 ## Known Issues That Can Cause Boot Loops
 
 ### 1. Corrupted Font Files ⚠️
+
 Custom fonts work fine **if the font file is valid**. The boot loop we experienced was caused by:
+
 - A corrupted download (HTML page instead of actual TTF file)
 - The corrupted file was applied as system font
 - System crashed trying to render text with invalid font data
 
 **To avoid this:**
+
 - Always verify font files before pushing: `file <fontname>.ttf`
 - Should show: `TrueType Font data, X tables...`
 - Should NOT show: `HTML document` or `ASCII text`
@@ -105,13 +114,17 @@ Custom fonts work fine **if the font file is valid**. The boot loop we experienc
 **Valid font installation works without issues or reboot.**
 
 ### 2. Aggressive System Settings Changes
+
 Some `adb shell settings put` commands can destabilize the system:
+
 - Avoid modifying system fonts via ADB
 - Avoid disabling core Google services
 - Test changes one at a time
 
 ### 3. Disabling Critical System Apps
+
 Never disable these packages:
+
 - `com.android.systemui` (System UI)
 - `com.android.settings` (Settings)
 - `com.google.android.gms` (Play Services - needed for many apps)
@@ -160,6 +173,7 @@ adb shell df -h
 ## Contact Bigme Support
 
 If nothing works:
+
 - Website: https://bigmestore.com/
 - Look for firmware download for Hibreak Pro
 - MediaTek SP Flash Tool may be needed for complete reflash
@@ -173,4 +187,3 @@ If nothing works:
 3. **Avoid font customization** - it's not worth the risk
 4. **Keep ADB accessible** - don't disable USB debugging
 5. **Document what you change** - makes troubleshooting easier
-
