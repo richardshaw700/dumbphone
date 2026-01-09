@@ -59,6 +59,7 @@ class MainActivity : AppCompatActivity() {
         AppItem("Contacts", listOf("org.fossify.contacts")),
         AppItem("Thermostat", listOf("com.ecobee.athenamobile")),
         AppItem("Quo", listOf("com.openphone")),
+        AppItem("VPN", listOf("net.mullvad.mullvadvpn")),
         SecurityItem
     )
 

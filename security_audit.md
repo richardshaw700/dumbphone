@@ -56,11 +56,12 @@ The Bigme Hibreak Pro comes pre-installed with 17+ manufacturer apps:
 
 ### 1.5 Network-Level Exposure
 
-| Vector              | What's Exposed                         |
-| ------------------- | -------------------------------------- |
-| DNS queries         | ISP sees every domain you visit        |
-| HTTP connections    | Unencrypted traffic visible to network |
-| Telemetry endpoints | Device constantly phoning home         |
+| Vector              | What's Exposed                              |
+| ------------------- | ------------------------------------------- |
+| DNS queries         | ISP sees every domain you visit             |
+| HTTP connections    | Unencrypted traffic visible to network      |
+| Telemetry endpoints | Device constantly phoning home              |
+| All traffic         | ISP can monitor/log all connection metadata |
 
 ---
 
@@ -75,6 +76,7 @@ Transform the phone into a minimal, privacy-respecting device by:
 3. **Restricting system services** - Limit Play Services permissions
 4. **Blocking tracking at network level** - Use encrypted DNS with tracker blocking
 5. **Disabling telemetry** - Turn off all usage reporting
+6. **Encrypting all traffic** - Always-on VPN to hide from ISP
 
 ### 2.2 App Replacement Strategy
 
@@ -90,14 +92,16 @@ Transform the phone into a minimal, privacy-respecting device by:
 
 ### 2.3 System Hardening
 
-| Action                 | Method                 |
-| ---------------------- | ---------------------- |
-| Delete Advertising ID  | ADB settings command   |
-| Disable telemetry      | ADB settings commands  |
-| Disable Google backup  | ADB settings command   |
-| Block tracker DNS      | NextDNS private DNS    |
-| Restrict Play Services | ADB appops permissions |
-| Remove bloatware       | ADB uninstall commands |
+| Action                 | Method                     |
+| ---------------------- | -------------------------- |
+| Delete Advertising ID  | ADB settings command       |
+| Disable telemetry      | ADB settings commands      |
+| Disable Google backup  | ADB settings command       |
+| Block tracker DNS      | NextDNS private DNS        |
+| Restrict Play Services | ADB appops permissions     |
+| Remove bloatware       | ADB uninstall commands     |
+| Encrypt all traffic    | Mullvad VPN (always-on)    |
+| Block ISP monitoring   | VPN kill switch enabled    |
 
 ### 2.4 Apps Removed
 
@@ -137,6 +141,7 @@ After implementing all hardening measures, here is the security posture of the d
 | Calculator       | ✅ Perfect     | Local computation                        |
 | Camera           | ✅ Perfect     | Local storage                            |
 | NextDNS          | ✅ Excellent   | Blocks trackers at network level         |
+| Mullvad VPN      | ✅ Excellent   | All traffic encrypted, ISP blind         |
 
 ### 3.2 Acceptable Risk (Necessary Trade-offs)
 
@@ -174,6 +179,7 @@ After implementing all hardening measures, here is the security posture of the d
 | Advertising ID     | ❌ Tracking enabled      | ✅ Deleted                       |
 | Telemetry          | ❌ Sending data          | ✅ Disabled                      |
 | DNS queries        | ❌ ISP sees all          | ✅ Encrypted + blocking          |
+| ISP surveillance   | ❌ All traffic visible   | ✅ VPN encrypted (Mullvad)       |
 | Play Services      | ❌ Full access           | 🟡 Heavily restricted            |
 | Google backup      | ❌ All data synced       | ✅ Disabled                      |
 | Clipboard spying   | ❌ Play Services access  | ✅ Blocked                       |
@@ -188,12 +194,13 @@ After implementing all hardening measures, here is the security posture of the d
 | Input Privacy      | 10/10 | HeliBoard = no keystroke logging      |
 | Navigation         | 9/10  | Organic Maps option available         |
 | System Telemetry   | 9/10  | Disabled + NextDNS blocking           |
+| Network Privacy    | 10/10 | Mullvad VPN + NextDNS = ISP blind     |
 | Smart Home         | 3/10  | Cloud-dependent, can't fix easily     |
 | AI Services        | 4/10  | Cloud by design                       |
 
-**Overall Score: 8/10**
+**Overall Score: 8.5/10**
 
-Excellent for a phone that maintains Google Wallet functionality and smart home integration.
+Excellent for a phone that maintains Google Wallet functionality and smart home integration. VPN provides additional layer of ISP protection.
 
 ---
 

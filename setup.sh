@@ -180,6 +180,7 @@ declare -a APPS=(
     "com.openphone|Quo"
     "org.fossify.gallery|Photos (Fossify Gallery)"
     "app.organicmaps|Encrypted Maps (Organic Maps)"
+    "net.mullvad.mullvadvpn|VPN (Mullvad)"
 )
 
 for app in "${APPS[@]}"; do
@@ -193,8 +194,24 @@ for app in "${APPS[@]}"; do
         echo -e "${YELLOW}→ Opening Play Store for: $NAME${NC}"
         adb shell am start -a android.intent.action.VIEW -d "market://details?id=$PACKAGE" > /dev/null 2>&1
         
-        echo -e "${CYAN}  Press Enter after installing $NAME...${NC}"
-        read -r
+        # Special handling for Mullvad VPN - show setup instructions
+        if [ "$PACKAGE" = "net.mullvad.mullvadvpn" ]; then
+            echo ""
+            echo -e "${CYAN}  1. Install Mullvad VPN from Play Store${NC}"
+            echo -e "${CYAN}  2. Open Mullvad and complete setup:${NC}"
+            echo "       - Tap 'Create account' to get a random account number"
+            echo "       - Save this number somewhere safe (it's your only login)"
+            echo "       - Add time: \$5/month, pay with card/crypto/cash"
+            echo "       - Tap 'Connect' to verify it works"
+            echo ""
+            echo -e "${GREEN}  💡 No email or personal info required!${NC}"
+            echo ""
+            echo -e "${CYAN}  Press Enter after installing and testing Mullvad...${NC}"
+            read -r
+        else
+            echo -e "${CYAN}  Press Enter after installing $NAME...${NC}"
+            read -r
+        fi
     fi
 done
 
@@ -575,6 +592,23 @@ fi
 if adb shell pm disable-user --user 0 com.google.android.contacts 2>/dev/null; then
     echo -e "  ${YELLOW}⚠️${NC} Disabled Google Contacts (replaced by Fossify)"
 fi
+
+# Configure Mullvad VPN as always-on
+echo ""
+echo -e "${CYAN}Configuring Mullvad VPN as always-on...${NC}"
+echo ""
+echo -e "${YELLOW}  Opening VPN settings. Please configure:${NC}"
+echo ""
+echo "    1. Tap the ⚙️ gear icon next to 'Mullvad VPN'"
+echo "    2. Toggle ON 'Always-on VPN'"
+echo "    3. Toggle ON 'Block connections without VPN'"
+echo ""
+echo -e "${GREEN}  This ensures ALL traffic goes through the VPN.${NC}"
+echo -e "${GREEN}  If VPN disconnects, internet is blocked (no leaks).${NC}"
+echo ""
+adb shell am start -a android.settings.VPN_SETTINGS > /dev/null 2>&1
+echo -e "${CYAN}  Press Enter after configuring always-on VPN...${NC}"
+read -r
 
 echo -e "${GREEN}✓ Privacy hardening complete${NC}"
 

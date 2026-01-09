@@ -161,6 +161,24 @@
             android:textColor="#444444"
             android:layout_marginBottom="24dp" />
         
+        <!-- VPN -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🌐  Always-On VPN"
+            android:textSize="22sp"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+        
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mullvad VPN encrypts all internet traffic. Your ISP can't see what you're doing—they only see encrypted data going to Mullvad. No email, no account, no logs."
+            android:textSize="16sp"
+            android:textColor="#444444"
+            android:layout_marginBottom="24dp" />
+        
         <!-- System Hardening -->
         <TextView
             android:layout_width="match_parent"

@@ -22,6 +22,7 @@
 - [Contacts](#contacts)
 - [Thermostat](#thermostat)
 - [Quo](#quo)
+- [VPN](#vpn)
 
 ---
 
@@ -128,3 +129,8 @@
 
 **Quo** - Customer service / business phone
 [Play Store](https://play.google.com/store/apps/details?id=com.openphone)
+
+## VPN
+
+**Mullvad VPN** - Privacy-first VPN, no account/email needed, $5/mo flat
+[Play Store](https://play.google.com/store/apps/details?id=net.mullvad.mullvadvpn)
