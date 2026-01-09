@@ -40,7 +40,7 @@ echo -e "${NC}"
 # Step 1: Check ADB and device connection
 # ============================================================
 
-echo -e "${YELLOW}[1/13] Checking device connection...${NC}"
+echo -e "${YELLOW}[1/14] Checking device connection...${NC}"
 
 if ! command -v adb &> /dev/null; then
     echo -e "${RED}Error: ADB not found. Please install Android SDK Platform Tools.${NC}"
@@ -95,7 +95,7 @@ fi
 # ============================================================
 
 echo ""
-echo -e "${YELLOW}[2/13] Checking for system updates...${NC}"
+echo -e "${YELLOW}[2/14] Checking for system updates...${NC}"
 echo -e "${CYAN}We'll check three different update sources.${NC}"
 echo ""
 
@@ -131,7 +131,7 @@ echo -e "${GREEN}✓ All system updates checked${NC}"
 # ============================================================
 
 echo ""
-echo -e "${YELLOW}[3/13] Pre-setup configuration...${NC}"
+echo -e "${YELLOW}[3/14] Pre-setup configuration...${NC}"
 
 # Open Play Store for sign-in
 echo -e "${CYAN}Opening Play Store - please sign into your Google account${NC}"
@@ -161,7 +161,7 @@ echo -e "${GREEN}✓ Pre-setup complete${NC}"
 # ============================================================
 
 echo ""
-echo -e "${YELLOW}[4/13] Opening Play Store for each app...${NC}"
+echo -e "${YELLOW}[4/14] Opening Play Store for each app...${NC}"
 echo -e "${CYAN}Please install each app when the Play Store opens.${NC}"
 echo ""
 
@@ -205,7 +205,7 @@ echo -e "${GREEN}✓ Play Store apps ready${NC}"
 # ============================================================
 
 echo ""
-echo -e "${YELLOW}[5/13] Installing F-Droid and privacy apps...${NC}"
+echo -e "${YELLOW}[5/14] Installing F-Droid and privacy apps...${NC}"
 
 # Download and install F-Droid
 echo -e "${CYAN}Downloading F-Droid...${NC}"
@@ -278,7 +278,7 @@ echo -e "${GREEN}✓ F-Droid apps installed${NC}"
 # ============================================================
 
 echo ""
-echo -e "${YELLOW}[6/13] Installing custom launcher...${NC}"
+echo -e "${YELLOW}[6/14] Installing custom launcher...${NC}"
 
 if [ ! -f "$LAUNCHER_APK" ]; then
     echo -e "${RED}Error: launcher.apk not found at $LAUNCHER_APK${NC}"
@@ -294,7 +294,7 @@ echo -e "${GREEN}✓ Dumb Phone launcher installed${NC}"
 # ============================================================
 
 echo ""
-echo -e "${YELLOW}[7/13] Setting launcher as default home...${NC}"
+echo -e "${YELLOW}[7/14] Setting launcher as default home...${NC}"
 
 # Clear any existing home app preference
 adb shell pm clear com.android.settings > /dev/null 2>&1 || true
@@ -315,7 +315,7 @@ echo -e "${GREEN}✓ Launcher configured${NC}"
 # ============================================================
 
 echo ""
-echo -e "${YELLOW}[8/13] Configuring system settings...${NC}"
+echo -e "${YELLOW}[8/14] Configuring system settings...${NC}"
 
 # Common stock launcher package names to try
 STOCK_LAUNCHERS=(
@@ -361,7 +361,7 @@ echo -e "${GREEN}✓ Lock screen notifications disabled${NC}"
 # ============================================================
 
 echo ""
-echo -e "${YELLOW}[9/13] Setting white wallpaper...${NC}"
+echo -e "${YELLOW}[9/14] Setting white wallpaper...${NC}"
 
 WHITE_IMAGE="$SCRIPT_DIR/white.png"
 
@@ -397,7 +397,7 @@ fi
 # ============================================================
 
 echo ""
-echo -e "${YELLOW}[10/13] Removing bloatware...${NC}"
+echo -e "${YELLOW}[10/14] Removing bloatware...${NC}"
 echo -e "${CYAN}Uninstalling non-essential apps to free up resources...${NC}"
 echo ""
 
@@ -500,7 +500,7 @@ echo -e "${GREEN}✓ Removed ${#DELETED_APPS[@]} apps${NC}"
 # ============================================================
 
 echo ""
-echo -e "${YELLOW}[11/13] Applying privacy hardening...${NC}"
+echo -e "${YELLOW}[11/14] Applying privacy hardening...${NC}"
 
 # Disable telemetry
 echo -e "${CYAN}Disabling telemetry...${NC}"
@@ -555,7 +555,7 @@ echo -e "${GREEN}✓ Privacy hardening complete${NC}"
 # ============================================================
 
 echo ""
-echo -e "${YELLOW}[12/13] Generating apps report...${NC}"
+echo -e "${YELLOW}[12/14] Generating apps report...${NC}"
 
 # Create reports directory if it doesn't exist
 mkdir -p "$SCRIPT_DIR/reports"
@@ -766,7 +766,7 @@ echo -e "${GREEN}✓ App list saved to: $APP_LIST_FILE${NC}"
 # ============================================================
 
 echo ""
-echo -e "${YELLOW}[13/13] Installing EB Garamond system font...${NC}"
+echo -e "${YELLOW}[13/14] Installing EB Garamond system font...${NC}"
 
 # Create Fonts folder on device
 adb shell mkdir -p /sdcard/Fonts 2>/dev/null || true
@@ -804,6 +804,31 @@ else
 fi
 
 # ============================================================
+# Step 14: Screen Timeout Settings
+# ============================================================
+
+echo ""
+echo -e "${YELLOW}[14/14] Configuring screen timeout...${NC}"
+
+echo ""
+echo -e "${CYAN}Set your preferred screen timeout:${NC}"
+echo "  - For e-ink displays, longer timeouts are recommended (5-10 min)"
+echo "  - Shorter timeouts save battery but require more unlocks"
+echo ""
+
+# Open display settings
+adb shell am start -a android.settings.DISPLAY_SETTINGS > /dev/null 2>&1
+
+echo -e "${CYAN}In Display settings:${NC}"
+echo "  1. Tap 'Screen timeout'"
+echo "  2. Select your preferred timeout (recommended: 5 or 10 minutes)"
+echo ""
+echo "Press Enter after setting screen timeout..."
+read -r
+
+echo -e "${GREEN}✓ Screen timeout configured${NC}"
+
+# ============================================================
 # Done!
 # ============================================================
 
@@ -820,11 +845,11 @@ echo "  ✅ Stock launcher disabled"
 echo "  ✅ Lock screen cleaned up"
 echo "  ✅ Privacy hardening applied"
 echo "  ✅ EB Garamond font installed"
+echo "  ✅ Screen timeout configured"
 echo ""
 echo "Next steps:"
-echo "  1. Reboot the device"
-echo "  2. Sign into each app as needed"
-echo "  3. Set up Google Wallet for tap-to-pay"
+echo "  1. Sign into each app as needed"
+echo "  2. Set up Google Wallet for tap-to-pay"
 echo ""
 echo -e "${CYAN}Apps report saved to:${NC}"
 echo "  $APP_LIST_FILE"
