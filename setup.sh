@@ -235,8 +235,17 @@ adb shell am start -n org.fdroid.fdroid/.FDroid > /dev/null 2>&1
 sleep 3
 
 echo -e "${CYAN}Please wait for F-Droid to update its repository list (first time may take a minute)${NC}"
-echo "Press Enter when F-Droid is ready..."
-read -r
+echo ""
+while true; do
+    echo -e "${CYAN}Press Enter when ready, or 'r' to re-open F-Droid:${NC}"
+    read -r FDROID_INPUT
+    if [ "$FDROID_INPUT" = "r" ] || [ "$FDROID_INPUT" = "R" ]; then
+        echo -e "${CYAN}Re-opening F-Droid...${NC}"
+        adb shell am start -n org.fdroid.fdroid/.FDroid > /dev/null 2>&1
+    else
+        break
+    fi
+done
 
 # F-Droid apps to install
 declare -a FDROID_APPS=(
