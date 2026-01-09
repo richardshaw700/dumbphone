@@ -269,17 +269,15 @@ for app in "${FDROID_APPS[@]}"; do
         # Open F-Droid directly to the app page (force F-Droid to handle with -p flag)
         adb shell am start -a android.intent.action.VIEW -d "https://f-droid.org/packages/$PACKAGE" -p org.fdroid.fdroid > /dev/null 2>&1
         
-        echo -e "${CYAN}  Press Enter after installing $NAME...${NC}"
-        read -r
-        
-        # Special handling for HeliBoard - open it and complete setup
+        # Special handling for HeliBoard - show setup instructions upfront
         if [ "$PACKAGE" = "helium314.keyboard" ]; then
             echo ""
-            echo -e "${CYAN}  Now open HeliBoard and complete the setup:${NC}"
-            echo "    1. Tap 'Enable HeliBoard'"
-            echo "    2. Toggle HeliBoard ON"
-            echo "    3. Tap 'Select HeliBoard'"
-            echo "    4. Choose HeliBoard as input method"
+            echo -e "${CYAN}  1. Install HeliBoard from F-Droid${NC}"
+            echo -e "${CYAN}  2. Open HeliBoard and complete setup:${NC}"
+            echo "       - Tap 'Enable HeliBoard'"
+            echo "       - Toggle HeliBoard ON"
+            echo "       - Tap 'Select HeliBoard'"
+            echo "       - Choose HeliBoard as input method"
             echo ""
             echo -e "${YELLOW}  ⚠️  Android will warn: 'This app may collect all your keystrokes'${NC}"
             echo -e "${GREEN}  ✓  This is EXACTLY why we're using HeliBoard!${NC}"
@@ -292,8 +290,10 @@ for app in "${FDROID_APPS[@]}"; do
             echo "     - Toggle OFF any other keyboards"
             echo "     Only HeliBoard should be enabled!"
             echo ""
-            adb shell am start -n helium314.keyboard/.settings.SettingsActivity > /dev/null 2>&1
-            echo -e "${CYAN}  Press Enter after completing HeliBoard setup...${NC}"
+            echo -e "${CYAN}  Press Enter after installing and setting up HeliBoard...${NC}"
+            read -r
+        else
+            echo -e "${CYAN}  Press Enter after installing $NAME...${NC}"
             read -r
         fi
     fi
