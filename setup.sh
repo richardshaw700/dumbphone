@@ -771,20 +771,26 @@ if [ -f "$FONT_FILE" ]; then
     echo -e "${GREEN}✓ EB Garamond font installed to /sdcard/Fonts/${NC}"
     
     echo ""
-    echo -e "${CYAN}To apply the font as system font:${NC}"
+    echo -e "${CYAN}To apply EB Garamond as system font:${NC}"
     echo "  1. Go to Settings → Display → Font set"
     echo "  2. Tap 'My font' tab"
     echo "  3. Select 'EBGaramond-VariableFont_wght'"
     echo "  4. Tap 'Apply'"
     echo ""
+    echo -e "${CYAN}Recommended: Adjust font size and weight for better readability:${NC}"
+    echo "  5. Go back to Display settings"
+    echo "  6. Tap 'Display size and text'"
+    echo "  7. Increase 'Font size' by 2-3 steps (Garamond is smaller)"
+    echo "  8. Enable 'Bold text' for better e-ink contrast"
+    echo ""
     
     # Open font settings
     adb shell am start -a android.settings.DISPLAY_SETTINGS > /dev/null 2>&1
     
-    echo "Press Enter after applying the font..."
+    echo "Press Enter after applying font, size, and bold settings..."
     read -r
     
-    echo -e "${GREEN}✓ Font applied${NC}"
+    echo -e "${GREEN}✓ Font and display settings applied${NC}"
 else
     echo -e "${YELLOW}  EBGaramond-VariableFont_wght.ttf not found in project directory${NC}"
     echo -e "${CYAN}  Download from: https://fonts.google.com/specimen/EB+Garamond${NC}"
