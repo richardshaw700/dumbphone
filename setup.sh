@@ -215,9 +215,28 @@ if ! adb shell pm list packages | grep -q "^package:org.fdroid.fdroid$"; then
     curl -L -o "$FDROID_APK" "https://f-droid.org/F-Droid.apk" 2>/dev/null
     adb install "$FDROID_APK" > /dev/null 2>&1
     echo -e "${GREEN}✓ F-Droid installed${NC}"
+    
+    # Wait for F-Droid to fully register
+    sleep 2
 else
     echo -e "${GREEN}✓ F-Droid already installed${NC}"
 fi
+
+# Verify F-Droid is actually installed before proceeding
+if ! adb shell pm list packages | grep -q "^package:org.fdroid.fdroid$"; then
+    echo -e "${RED}✗ F-Droid installation failed. Please install manually from https://f-droid.org${NC}"
+    echo "Press Enter to continue anyway..."
+    read -r
+fi
+
+# Open F-Droid first to let it initialize and update repos
+echo -e "${CYAN}Opening F-Droid to initialize...${NC}"
+adb shell am start -n org.fdroid.fdroid/.FDroid > /dev/null 2>&1
+sleep 3
+
+echo -e "${CYAN}Please wait for F-Droid to update its repository list (first time may take a minute)${NC}"
+echo "Press Enter when F-Droid is ready..."
+read -r
 
 # F-Droid apps to install
 declare -a FDROID_APPS=(
@@ -241,6 +260,7 @@ for app in "${FDROID_APPS[@]}"; do
         # Open F-Droid directly to the app page
         adb shell am start -a android.intent.action.VIEW -d "https://f-droid.org/packages/$PACKAGE" > /dev/null 2>&1
         
+        echo -e "${CYAN}  If prompted, select 'F-Droid' to open the link${NC}"
         echo -e "${CYAN}  Press Enter after installing $NAME...${NC}"
         read -r
         
