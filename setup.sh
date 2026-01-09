@@ -137,7 +137,14 @@ echo -e "${YELLOW}[3/13] Pre-setup configuration...${NC}"
 echo -e "${CYAN}Opening Play Store - please sign into your Google account${NC}"
 adb shell am start -n com.android.vending/com.google.android.finsky.activities.MainActivity > /dev/null 2>&1
 echo ""
-echo "Press Enter after signing into Play Store..."
+echo -e "${RED}⚠️  IMPORTANT: When prompted about backup:${NC}"
+echo -e "${RED}   Select 'Don't back up' or disable backup!${NC}"
+echo ""
+echo -e "${YELLOW}   Why: Google Backup uploads your app data, Wi-Fi passwords,${NC}"
+echo -e "${YELLOW}   call history, device settings, and SMS to Google servers.${NC}"
+echo -e "${YELLOW}   This data can be accessed by Google and law enforcement.${NC}"
+echo ""
+echo "Press Enter after signing in (with backup DISABLED)..."
 read -r
 
 # Open NFC settings
