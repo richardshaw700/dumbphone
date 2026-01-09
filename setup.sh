@@ -755,42 +755,39 @@ TOTAL_COUNT=$(echo "$ALL_PACKAGES" | wc -l | tr -d ' ')
 echo -e "${GREEN}✓ App list saved to: $APP_LIST_FILE${NC}"
 
 # ============================================================
-# Step 13: Custom Font (OPTIONAL - HIGH RISK)
+# Step 13: Install EB Garamond System Font
 # ============================================================
 
 echo ""
-echo -e "${RED}[13/13] Custom Font Installation (OPTIONAL)${NC}"
-echo ""
-echo -e "${RED}⚠️  WARNING: Custom fonts can cause BOOT LOOPS!${NC}"
-echo -e "${RED}   If the device gets stuck, you may need to FACTORY RESET.${NC}"
-echo -e "${RED}   See troubleshooting.md for recovery instructions.${NC}"
-echo ""
-echo -e "${YELLOW}Do you want to install EB Garamond font? (y/N)${NC}"
-read -r INSTALL_FONT
+echo -e "${YELLOW}[13/13] Installing EB Garamond system font...${NC}"
 
-if [ "$INSTALL_FONT" = "y" ] || [ "$INSTALL_FONT" = "Y" ]; then
-    # Create Fonts folder on device
-    adb shell mkdir -p /sdcard/Fonts 2>/dev/null || true
+# Create Fonts folder on device
+adb shell mkdir -p /sdcard/Fonts 2>/dev/null || true
 
-    # Use bundled EB Garamond variable font (supports multiple weights)
-    FONT_FILE="$SCRIPT_DIR/EBGaramond-VariableFont_wght.ttf"
-    if [ -f "$FONT_FILE" ]; then
-        adb push "$FONT_FILE" /sdcard/Fonts/ > /dev/null 2>&1
-        echo -e "${GREEN}✓ EB Garamond font copied to /sdcard/Fonts/${NC}"
-        
-        echo ""
-        echo -e "${CYAN}To apply the font (AT YOUR OWN RISK):${NC}"
-        echo "  1. Go to Settings → Display → Font set"
-        echo "  2. Tap 'My font' tab"
-        echo "  3. Select 'EBGaramond-VariableFont_wght'"
-        echo "  4. Tap 'Apply'"
-        echo "  5. If device boot loops, see troubleshooting.md"
-        echo ""
-    else
-        echo -e "${YELLOW}  Font file not found, skipping${NC}"
-    fi
+# Use bundled EB Garamond variable font (supports multiple weights)
+FONT_FILE="$SCRIPT_DIR/EBGaramond-VariableFont_wght.ttf"
+if [ -f "$FONT_FILE" ]; then
+    adb push "$FONT_FILE" /sdcard/Fonts/ > /dev/null 2>&1
+    echo -e "${GREEN}✓ EB Garamond font installed to /sdcard/Fonts/${NC}"
+    
+    echo ""
+    echo -e "${CYAN}To apply the font as system font:${NC}"
+    echo "  1. Go to Settings → Display → Font set"
+    echo "  2. Tap 'My font' tab"
+    echo "  3. Select 'EBGaramond-VariableFont_wght'"
+    echo "  4. Tap 'Apply'"
+    echo ""
+    
+    # Open font settings
+    adb shell am start -a android.settings.DISPLAY_SETTINGS > /dev/null 2>&1
+    
+    echo "Press Enter after applying the font..."
+    read -r
+    
+    echo -e "${GREEN}✓ Font applied${NC}"
 else
-    echo -e "${GREEN}✓ Skipping font installation (recommended)${NC}"
+    echo -e "${YELLOW}  EBGaramond-VariableFont_wght.ttf not found in project directory${NC}"
+    echo -e "${CYAN}  Download from: https://fonts.google.com/specimen/EB+Garamond${NC}"
 fi
 
 # ============================================================
@@ -809,6 +806,7 @@ echo "  ✅ ${#DELETED_APPS[@]} bloatware apps removed"
 echo "  ✅ Stock launcher disabled"
 echo "  ✅ Lock screen cleaned up"
 echo "  ✅ Privacy hardening applied"
+echo "  ✅ EB Garamond font installed"
 echo ""
 echo "Next steps:"
 echo "  1. Reboot the device"

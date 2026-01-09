@@ -91,18 +91,18 @@ fastboot reboot recovery
 
 ## Known Issues That Can Cause Boot Loops
 
-### 1. Custom Font Installation ⚠️ HIGH RISK
-**DO NOT change the system font** via Settings → Display → Font set.
+### 1. Corrupted Font Files ⚠️
+Custom fonts work fine **if the font file is valid**. The boot loop we experienced was caused by:
+- A corrupted download (HTML page instead of actual TTF file)
+- The corrupted file was applied as system font
+- System crashed trying to render text with invalid font data
 
-Custom fonts placed in `/sdcard/Fonts/` can cause boot loops if:
-- The font file is corrupted
-- The font format is incompatible
-- The system font cache becomes corrupted
+**To avoid this:**
+- Always verify font files before pushing: `file <fontname>.ttf`
+- Should show: `TrueType Font data, X tables...`
+- Should NOT show: `HTML document` or `ASCII text`
 
-**If you must use custom fonts:**
-- Test on a secondary device first
-- Keep a backup of your data
-- Be prepared to factory reset
+**Valid font installation works without issues or reboot.**
 
 ### 2. Aggressive System Settings Changes
 Some `adb shell settings put` commands can destabilize the system:
