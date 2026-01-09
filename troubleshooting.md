@@ -2,6 +2,8 @@
 
 ## Boot Loop / Bricked Device
 
+✅ **Successfully recovered from boot loop on 2026-01-09** using Factory Reset via Recovery Mode.
+
 If your device gets stuck in a boot loop (infinite loading animation), follow these steps.
 
 ### Step 1: Check ADB Connection
@@ -54,13 +56,16 @@ Power off
 - Select "Reboot system now"
 - If it boot loops again, go back to recovery
 
-#### Option B: Wipe Data/Factory Reset ⚠️ ERASES ALL DATA
+#### Option B: Wipe Data/Factory Reset ⚠️ ERASES ALL DATA (THIS WORKED ✅)
 - Select "Wipe data/factory reset"
-- Confirm when prompted
+- Confirm YES when prompted
 - Wait for completion
+- Optionally also run "A/B OTA reset" (resets partition slots)
 - Select "Reboot system now"
 
 **This will erase all apps, accounts, and data. You'll need to set up the phone again.**
+
+**Note:** May need to run factory reset multiple times if first attempt doesn't work.
 
 ### Step 6: Fastboot Mode (Advanced)
 
