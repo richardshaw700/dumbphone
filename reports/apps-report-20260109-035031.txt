@@ -1,0 +1,180 @@
+# Bigme Hibreak Pro - Apps Report
+# Generated: Fri Jan  9 03:50:31 EST 2026
+# Device: B651D2B2FMJA006000082
+# Packages remaining: 225
+
+Legend: ✅ KEEP | ❌ DELETED | ⚠️ DISABLED
+
+================================================================================
+## DUMB PHONE LAUNCHER (Your Apps)
+================================================================================
+
+| Status | Package | App Name | Function |
+|--------|---------|----------|----------|
+| ✅ KEEP | com.bigme.dumbphone | Dumb Phone | Custom minimal launcher |
+
+================================================================================
+## USER-INSTALLED APPS (In Your Dumb Phone List)
+================================================================================
+
+| Status | Package | App Name | Function |
+|--------|---------|----------|----------|
+| ✅ KEEP | app.organicmaps | Organic Maps | Encrypted offline navigation |
+| ✅ KEEP | com.aisense.otter | Otter.ai | AI meeting transcription |
+| ✅ KEEP | com.ecobee.athenamobile | Ecobee | Smart thermostat control |
+| ✅ KEEP | com.openai.chatgpt | ChatGPT | AI assistant |
+| ✅ KEEP | com.openphone | Quo | Business phone/customer service |
+| ✅ KEEP | com.scotiabank.banking | Scotiabank | Banking app |
+| ✅ KEEP | com.td | TD Canada | Banking app |
+| ✅ KEEP | com.thewizrd.simpleweather | SimpleWeather | Weather app (ad-free) |
+| ✅ KEEP | com.tplink.kasa_android | Kasa | Smart home device control |
+| ✅ KEEP | com.whatsapp | WhatsApp | Semi-encrypted messaging |
+| ✅ KEEP | eu.faircode.email | FairEmail | Private direct IMAP email |
+| ✅ KEEP | org.fossify.contacts | Fossify Contacts | Local-only contacts |
+| ✅ KEEP | org.fossify.gallery | Fossify Gallery | Private photo gallery |
+| ✅ KEEP | org.thoughtcrime.securesms | Signal | Encrypted messaging |
+| ✅ KEEP | org.fairscan.app | FairScan | Offline PDF scanner |
+| ❌ DELETED | com.adobe.scan.android | Adobe Scan | Replaced by OSS Doc Scanner |
+| ❌ DELETED | com.readdle.spark | Spark | Replaced by FairEmail |
+
+================================================================================
+## GOOGLE SUITE (User-Facing Apps)
+================================================================================
+
+| Status | Package | App Name | Function |
+|--------|---------|----------|----------|
+| ⚠️ DISABLED | com.android.vending | Play Store | App store (hidden, auto-updates) |
+| ✅ KEEP | com.google.android.apps.maps | Google Maps | Navigation |
+| ✅ KEEP | com.google.android.apps.messaging | Google Messages | SMS/RCS messaging |
+| ✅ KEEP | com.google.android.apps.walletnfcrel | Google Wallet | Tap-to-pay & cards |
+| ✅ KEEP | com.google.android.calculator | Calculator | Calculator |
+| ⚠️ DISABLED | com.google.android.contacts | Google Contacts | Replaced by Fossify |
+| ✅ KEEP | com.google.android.dialer | Phone | Phone dialer |
+| ❌ DELETED | com.android.chrome | Chrome | Web browser |
+| ❌ DELETED | com.google.android.apps.docs | Google Docs | Document editing |
+| ❌ DELETED | com.google.android.apps.googleassistant | Google Assistant | Voice assistant |
+| ❌ DELETED | com.google.android.apps.photos | Google Photos | Replaced by Fossify |
+| ❌ DELETED | com.google.android.apps.tachyon | Google Meet | Video calling |
+| ❌ DELETED | com.google.android.apps.wellbeing | Digital Wellbeing | Screen time |
+| ❌ DELETED | com.google.android.apps.youtube.music | YouTube Music | Music streaming |
+| ❌ DELETED | com.google.android.calendar | Google Calendar | Calendar |
+| ❌ DELETED | com.google.android.gm | Gmail | Email (replaced by FairEmail) |
+| ❌ DELETED | com.google.android.googlequicksearchbox | Google Search | Search |
+| ❌ DELETED | com.google.android.keep | Google Keep | Notes |
+| ❌ DELETED | com.google.android.videos | Google TV | Video player |
+| ❌ DELETED | com.google.android.youtube | YouTube | Video streaming |
+
+================================================================================
+## GOOGLE SERVICES (Background/System)
+================================================================================
+
+| Status | Package | App Name | Function |
+|--------|---------|----------|----------|
+| ✅ KEEP | com.google.android.gms | Play Services | Core Google services |
+| ✅ KEEP | com.google.android.gsf | Google Services Framework | Google framework |
+| ✅ KEEP | com.google.android.webview | Android WebView | Web content rendering |
+| ✅ KEEP | com.google.android.tts | Google Text-to-Speech | Voice synthesis |
+| ✅ KEEP | com.google.android.permissioncontroller | Permission Controller | Permissions |
+| ✅ KEEP | com.google.android.packageinstaller | Package Installer | App installation |
+| ✅ KEEP | com.google.android.documentsui | Files | File manager |
+| ✅ KEEP | com.google.android.networkstack | Network Stack | Network services |
+
+================================================================================
+## BIGME/XRZ APPS (Manufacturer)
+================================================================================
+
+| Status | Package | App Name | Function |
+|--------|---------|----------|----------|
+| ⚠️ DISABLED | com.xrz.standby | Standby Screen | Lock screen logo |
+| ✅ KEEP | com.xrz.mutidisplay | Multi Display | E-ink display settings |
+| ✅ KEEP | com.xrz.sys.control | System Control | E-ink refresh settings |
+| ✅ KEEP | com.xrz.res.service | Resource Service | System service |
+| ❌ DELETED | com.xrz.ai | Bigme AI | AI assistant |
+| ❌ DELETED | com.xrz.appstore | Bigme App Store | Alternative app store |
+| ❌ DELETED | com.xrz.bigmecloud | Bigme Cloud | Cloud storage |
+| ❌ DELETED | com.xrz.bookmall | Book Mall | Book store |
+| ❌ DELETED | com.xrz.bookself | Bookshelf | E-book library |
+| ❌ DELETED | com.xrz.btranslate | Bigme Translate | Translation |
+| ❌ DELETED | com.xrz.dictapp | Dictionary | Dictionary app |
+| ❌ DELETED | com.xrz.ebook | E-Book Reader | E-book reader |
+| ❌ DELETED | com.xrz.ebook.launcher | E-Book Launcher | Reading launcher |
+| ❌ DELETED | com.xrz.hoverballdemo | Hover Ball | Floating shortcut |
+| ❌ DELETED | com.xrz.music | Music Player | Music player |
+| ❌ DELETED | com.xrz.scandoc | Document Scanner | Bigme doc scanner |
+| ❌ DELETED | com.xrz.soundrecord | Sound Recorder | Audio recording |
+| ❌ DELETED | com.xrz.voice.text | Voice to Text | Speech recognition |
+| ❌ DELETED | com.xrz.xreaderV3 | X Reader | PDF/document reader |
+| ❌ DELETED | com.b300.xrz.web | Bigme Browser | Web browser |
+| ❌ DELETED | com.ebook.wifitransferbook | WiFi Transfer | File transfer |
+
+================================================================================
+## MEDIATEK SYSTEM (Chipset/Hardware)
+================================================================================
+
+| Status | Package | App Name | Function |
+|--------|---------|----------|----------|
+| ✅ KEEP | com.mediatek.camera | Camera | Stock camera app |
+| ✅ KEEP | com.mediatek.miravision.ui | MiraVision | Display calibration |
+| ✅ KEEP | com.mediatek.batterywarning | Battery Warning | Low battery alerts |
+| ✅ KEEP | com.mediatek.ims | IMS Service | VoLTE/VoWiFi |
+| ✅ KEEP | com.mediatek.telephony | Telephony | Phone service |
+| ❌ DELETED | com.mediatek.callrecorder | Call Recorder | Call recording |
+| ❌ DELETED | com.mediatek.duraspeed | DuraSpeed | Performance optimization |
+| ❌ DELETED | com.mediatek.factorymode | Factory Mode | Hardware testing |
+| ❌ DELETED | com.mediatek.voicecommand | Voice Command | Voice control |
+| ❌ DELETED | com.mediatek.voiceunlock | Voice Unlock | Voice unlock |
+
+================================================================================
+## ANDROID CORE SYSTEM
+================================================================================
+
+| Status | Package | App Name | Function |
+|--------|---------|----------|----------|
+| ⚠️ DISABLED | com.android.launcher3 | Stock Launcher | Default home (replaced) |
+| ✅ KEEP | android | Android System | Core OS |
+| ✅ KEEP | com.android.systemui | System UI | Status bar, notifications |
+| ✅ KEEP | com.android.settings | Settings | System settings |
+| ✅ KEEP | com.android.phone | Phone Service | Telephony |
+| ✅ KEEP | com.android.bluetooth | Bluetooth | Bluetooth service |
+| ✅ KEEP | com.android.nfc | NFC | NFC service |
+| ✅ KEEP | com.android.deskclock | Clock | Clock & alarms |
+| ✅ KEEP | com.android.inputmethod.latin | AOSP Keyboard | Backup keyboard |
+| ✅ KEEP | com.android.providers.contacts | Contacts Provider | Contact storage |
+| ✅ KEEP | com.android.providers.downloads | Download Manager | Downloads |
+| ✅ KEEP | com.android.providers.media | Media Provider | Media database |
+| ✅ KEEP | com.android.providers.telephony | Telephony Provider | SMS/MMS storage |
+| ✅ KEEP | com.android.mms.service | MMS Service | MMS handling |
+| ✅ KEEP | com.android.shell | Shell | ADB shell |
+| ✅ KEEP | com.android.keychain | Key Chain | Certificate storage |
+| ✅ KEEP | com.android.emergency | Emergency Info | Emergency contacts |
+
+================================================================================
+## OTHER APPS
+================================================================================
+
+| Status | Package | App Name | Function |
+|--------|---------|----------|----------|
+| ✅ KEEP | com.trustonic.teeservice | TEE Service | Security enclave |
+| ❌ DELETED | com.sohu.inputmethod.sogou.oem | Sogou Keyboard | Chinese keyboard |
+| ❌ DELETED | com.eusoft.eudic | Eudic | Dictionary |
+| ❌ DELETED | com.socialnmobile.colordict | ColorDict | Dictionary |
+| ❌ DELETED | com.iflytek.speechcloud | iFlytek Speech | Chinese speech |
+| ❌ DELETED | com.xsyt.faceregister | Face Register | Face unlock setup |
+| ❌ DELETED | com.debug.loggerui | Logger UI | Debug logging |
+
+================================================================================
+## SUMMARY
+================================================================================
+
+Apps deleted in this session: 0
+
+✅ KEEP   = Essential for dumb phone or system stability
+❌ DELETED = Uninstalled for user (can be reinstalled via Play Store or ADB)
+⚠️ DISABLED = Disabled but not uninstalled (can be re-enabled)
+
+To restore a deleted system app:
+  adb shell cmd package install-existing <package>
+
+To re-enable a disabled app:
+  adb shell pm enable <package>
+

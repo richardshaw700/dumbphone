@@ -1,0 +1,55 @@
+═══════════════════════════════════════════════════════════
+          BIGME HIBREAK PRO - INSTALLED APPS REPORT
+═══════════════════════════════════════════════════════════
+Generated: Fri Jan  9 03:36:23 EST 2026
+Total Packages: 225
+
+═══════════════════════════════════════════════════════════
+                    DUMB PHONE LAUNCHER APPS
+═══════════════════════════════════════════════════════════
+
+✅ Phone (com.google.android.dialer)
+✅ Messages Group:
+   └─ Unencrypted (com.google.android.apps.messaging)
+   └─ Semi-encrypted (com.whatsapp)
+   └─ Encrypted (org.thoughtcrime.securesms)
+✅ AI Chat (com.openai.chatgpt)
+✅ Wallet (com.google.android.apps.walletnfcrel)
+✅ Maps Group:
+   └─ Unencrypted (com.google.android.apps.maps)
+   └─ Encrypted (app.organicmaps)
+✅ Settings (com.android.settings)
+✅ Weather (com.thewizrd.simpleweather)
+✅ Calculator (com.google.android.calculator)
+✅ Camera (com.mediatek.camera)
+✅ Photos (org.fossify.gallery)
+✅ Email (eu.faircode.email)
+✅ Doc Scanner (org.fairscan.app)
+✅ AI Note Taker (com.aisense.otter)
+✅ TD Bank (com.td)
+✅ Scotiabank (com.scotiabank.banking)
+✅ Smart Devices (com.tplink.kasa_android)
+✅ Contacts (org.fossify.contacts)
+✅ Thermostat (com.ecobee.athenamobile)
+✅ Quo (com.openphone)
+
+═══════════════════════════════════════════════════════════
+                    PRIVACY REPLACEMENTS
+═══════════════════════════════════════════════════════════
+
+🔒 HeliBoard (helium314.keyboard) - Replaced stock keyboard
+🔒 Fossify Contacts (org.fossify.contacts) - Replaced Google Contacts
+🔒 Fossify Gallery (org.fossify.gallery) - Replaced Google Photos
+🔒 FairEmail (eu.faircode.email) - Replaced Spark
+🔒 FairScan (org.fairscan.app) - Replaced Adobe Scan
+🔒 Organic Maps (app.organicmaps) - Privacy alternative to Google Maps
+🔒 Signal (org.thoughtcrime.securesms) - Encrypted messaging
+
+═══════════════════════════════════════════════════════════
+                    REMOVED/DISABLED APPS
+═══════════════════════════════════════════════════════════
+
+❌ Spark (com.readdle.spark) - Removed
+❌ Adobe Scan (com.adobe.scan.android) - Removed
+⚠️  Google Contacts (com.google.android.contacts) - Disabled
+

@@ -1,5 +1,7 @@
 package com.bigme.dumbphone
 
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 class MainActivity : AppCompatActivity() {
 
     private lateinit var adapter: AppAdapter
+    private var screenReceiver: ScreenReceiver? = null
 
     // Apps structure - some are groups with children
     private val appStructure = listOf(
@@ -31,7 +34,10 @@ class MainActivity : AppCompatActivity() {
         )),
         AppItem("AI Chat", listOf("com.openai.chatgpt")),
         AppItem("Wallet", listOf("com.google.android.apps.walletnfcrel")),
-        AppItem("Maps", listOf("com.google.android.apps.maps")),
+        AppGroup("Maps", listOf(
+            AppItem("Unencrypted", listOf("com.google.android.apps.maps")),
+            AppItem("Encrypted", listOf("app.organicmaps"))
+        )),
         AppItem("Settings", listOf("com.android.settings")),
         AppItem("Weather", listOf("com.thewizrd.simpleweather")),
         AppItem("Calculator", listOf(
@@ -44,16 +50,13 @@ class MainActivity : AppCompatActivity() {
             "com.android.camera"
         )),
         AppItem("Photos", listOf("org.fossify.gallery")),
-        AppItem("Email", listOf("com.readdle.spark")),
-        AppItem("Doc Scanner", listOf("com.adobe.scan.android")),
+        AppItem("Email", listOf("eu.faircode.email")),
+        AppItem("Doc Scanner", listOf("org.fairscan.app")),
         AppItem("AI Note Taker", listOf("com.aisense.otter")),
         AppItem("TD Bank", listOf("com.td")),
         AppItem("Scotiabank", listOf("com.scotiabank.banking")),
         AppItem("Smart Devices", listOf("com.tplink.kasa_android")),
-        AppItem("Contacts", listOf(
-            "com.google.android.contacts",
-            "com.android.contacts"
-        )),
+        AppItem("Contacts", listOf("org.fossify.contacts")),
         AppItem("Thermostat", listOf("com.ecobee.athenamobile")),
         AppItem("Quo", listOf("com.openphone"))
     )
@@ -71,6 +74,33 @@ class MainActivity : AppCompatActivity() {
             onGroupClick = { group -> toggleGroup(group) }
         )
         recyclerView.adapter = adapter
+        
+        // Register screen receiver for lock screen overlay
+        registerScreenReceiver()
+    }
+    
+    private fun registerScreenReceiver() {
+        if (screenReceiver == null) {
+            screenReceiver = ScreenReceiver()
+            val filter = IntentFilter().apply {
+                addAction(Intent.ACTION_SCREEN_ON)
+            }
+            registerReceiver(screenReceiver, filter)
+        }
+    }
+    
+    override fun onResume() {
+        super.onResume()
+        // User reached home screen = unlocked, cancel any pending overlay restart
+        LockScreenActivity.cancelPendingRestart()
+    }
+    
+    override fun onDestroy() {
+        super.onDestroy()
+        screenReceiver?.let {
+            unregisterReceiver(it)
+            screenReceiver = null
+        }
     }
 
     private val expandedGroups = mutableSetOf<String>()

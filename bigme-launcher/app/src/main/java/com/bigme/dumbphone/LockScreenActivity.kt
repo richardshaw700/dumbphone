@@ -1,14 +1,11 @@
 package com.bigme.dumbphone
 
 import android.app.Activity
-import android.app.KeyguardManager
-import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.os.PowerManager
-import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
@@ -17,13 +14,23 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class LockScreenActivity : Activity() {
-    
-    private var wakeLock: PowerManager.WakeLock? = null
 
-    private lateinit var timeText: TextView
-    private lateinit var dateText: TextView
-    private lateinit var gestureDetector: GestureDetector
+    private lateinit var clockText: TextView
     private val handler = Handler(Looper.getMainLooper())
+    
+    private val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())  // 24h format
+
+    companion object {
+        private val restartHandler = Handler(Looper.getMainLooper())
+        private var pendingRestart: Runnable? = null
+        
+        // Call this when user unlocks (reaches home screen)
+        fun cancelPendingRestart() {
+            pendingRestart?.let { restartHandler.removeCallbacks(it) }
+            pendingRestart = null
+        }
+    }
+
     private val updateTimeRunnable = object : Runnable {
         override fun run() {
             updateTime()
@@ -34,17 +41,10 @@ class LockScreenActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
-        // Wake up the screen
-        val powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
-        wakeLock = powerManager.newWakeLock(
-            PowerManager.SCREEN_BRIGHT_WAKE_LOCK or 
-            PowerManager.ACQUIRE_CAUSES_WAKEUP or
-            PowerManager.ON_AFTER_RELEASE,
-            "DumbPhone:LockScreen"
-        )
-        wakeLock?.acquire(10000) // 10 seconds max
+        // Cancel any pending restart since we're showing now
+        cancelPendingRestart()
         
-        // Show over lock screen
+        // Use newer APIs on Android 8.0+ for faster lock screen overlay
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
             setShowWhenLocked(true)
             setTurnScreenOn(true)
@@ -55,104 +55,74 @@ class LockScreenActivity : Activity() {
             )
         }
         
-        // Keep screen on while lock screen is visible
-        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        // Fullscreen flags
+        window.addFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN or
+            WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
         
-        // Full screen
+        // Hide system UI immediately
         window.decorView.systemUiVisibility = (
-            View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-            View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
             View.SYSTEM_UI_FLAG_FULLSCREEN or
-            View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or
             View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or
-            View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+            View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or
+            View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
+            View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE
         )
         
         setContentView(R.layout.activity_lockscreen)
         
-        timeText = findViewById(R.id.timeText)
-        dateText = findViewById(R.id.dateText)
+        clockText = findViewById(R.id.clockText)
         
-        // Swipe up to dismiss
-        gestureDetector = GestureDetector(this, object : GestureDetector.SimpleOnGestureListener() {
-            override fun onFling(
-                e1: MotionEvent?,
-                e2: MotionEvent,
-                velocityX: Float,
-                velocityY: Float
-            ): Boolean {
-                if (e1 != null && e2 != null) {
-                    val diffY = e1.y - e2.y
-                    if (diffY > 100 && Math.abs(velocityY) > 100) {
-                        // Swipe up detected
-                        dismissLockScreen()
-                        return true
-                    }
-                }
-                return false
-            }
-            
-            override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
-                // Also dismiss on tap for convenience
-                dismissLockScreen()
-                return true
-            }
-        })
-        
-        findViewById<View>(R.id.lockScreenRoot).setOnTouchListener { _, event ->
-            gestureDetector.onTouchEvent(event)
-            true
-        }
+        updateTime()
     }
-    
+
     override fun onResume() {
         super.onResume()
-        updateTime()
         handler.post(updateTimeRunnable)
     }
-    
+
     override fun onPause() {
         super.onPause()
         handler.removeCallbacks(updateTimeRunnable)
     }
-    
+
     private fun updateTime() {
-        val now = Date()
-        val timeFormat = SimpleDateFormat("h:mm", Locale.getDefault())
-        val dateFormat = SimpleDateFormat("EEEE, MMMM d", Locale.getDefault())
-        
-        timeText.text = timeFormat.format(now)
-        dateText.text = dateFormat.format(now)
+        clockText.text = timeFormat.format(Date())
+    }
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        // Tap anywhere to dismiss
+        if (event.action == MotionEvent.ACTION_UP) {
+            dismissAndScheduleRestart()
+            return true
+        }
+        return super.onTouchEvent(event)
     }
     
-    private fun dismissLockScreen() {
-        // Release wake lock
-        wakeLock?.let {
-            if (it.isHeld) {
-                it.release()
+    private fun dismissAndScheduleRestart() {
+        val context = applicationContext
+        
+        // Schedule restart after 3 seconds
+        // (MainActivity.onResume will cancel this if user unlocks)
+        pendingRestart = Runnable {
+            try {
+                val intent = Intent(context, LockScreenActivity::class.java).apply {
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                }
+                context.startActivity(intent)
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
+        restartHandler.postDelayed(pendingRestart!!, 3000)
         
-        // Dismiss keyguard if possible
-        val keyguardManager = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            keyguardManager.requestDismissKeyguard(this, null)
-        }
         finish()
-        overridePendingTransition(0, android.R.anim.fade_out)
     }
-    
-    override fun onDestroy() {
-        super.onDestroy()
-        wakeLock?.let {
-            if (it.isHeld) {
-                it.release()
-            }
-        }
-    }
-    
+
     override fun onBackPressed() {
-        // Do nothing - prevent back button from dismissing
+        // Do nothing - require tap to dismiss
     }
 }
-

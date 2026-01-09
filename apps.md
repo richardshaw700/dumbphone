@@ -6,7 +6,8 @@
 - [Encrypted](#encrypted-chat)
 - [AI Chat](#ai-chat)
 - [Wallet](#wallet)
-- [Maps](#google-maps)
+- [Unencrypted Maps](#unencrypted-maps)
+- [Encrypted Maps](#encrypted-maps)
 - [Settings](#settings)
 - [Weather](#weather)
 - [Calculator](#calculator)
@@ -47,9 +48,14 @@
 **Google Wallet** - Tap-to-pay, cards, passes
 [Play Store](https://play.google.com/store/apps/details?id=com.google.android.apps.walletnfcrel)
 
-## Google Maps
+## Unencrypted Maps
 
-**Stock** - Navigation, directions
+**Google Maps** (Stock) - Navigation, directions, traffic, Street View
+
+## Encrypted Maps
+
+**Organic Maps** - Offline, privacy-first navigation with OpenStreetMap
+[Play Store](https://play.google.com/store/apps/details?id=app.organicmaps)
 
 ## Settings
 
@@ -75,13 +81,13 @@
 
 ## Email
 
-**Spark** - Unified inbox for iCloud, Gmail, and more
-[Play Store](https://play.google.com/store/apps/details?id=com.readdle.spark)
+**FairEmail** - Privacy-focused, direct IMAP connection (no middleman)
+[F-Droid](https://f-droid.org/en/packages/eu.faircode.email/)
 
 ## Doc Scanner
 
-**Adobe Scan** - Free, OCR, exports to PDF
-[Play Store](https://play.google.com/store/apps/details?id=com.adobe.scan.android)
+**FairScan** - Simple, offline PDF scanner with auto-detect and crop
+[F-Droid](https://f-droid.org/en/packages/org.fairscan.app/)
 
 ## AI Note Taker
 
@@ -110,7 +116,8 @@
 
 ## Contacts
 
-**Google Contacts** (Stock) - Contact management
+**Fossify Contacts** - Local only, no cloud sync, open source
+[F-Droid](https://f-droid.org/en/packages/org.fossify.contacts/)
 
 ## Thermostat
 
